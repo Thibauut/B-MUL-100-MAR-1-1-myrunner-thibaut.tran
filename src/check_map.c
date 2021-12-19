@@ -9,10 +9,10 @@
 
 sfvi find_player(char **map)
 {
-    int x = -1, y = 0;
+    int x = 0, y = 0;
     while (map[y][x] != 'X') {
         x += 1;
-        if (x == 193) {
+        if (x == 192) {
             y += 1;
             x = 0;
         }

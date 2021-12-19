@@ -50,3 +50,14 @@ spt *rect_ronin(sfrw *window, my_game_t game, my_var_t *var)
     sfSprite_setTextureRect(game.ronin, rect);
     return (game.ronin);
 }
+
+spt *rect2_ronin(sfrw *window, my_game_t game, my_clock_t *c_anim)
+{
+    sfIntRect rect;
+    rect.top = 64;
+    rect.left = 0 + c_anim->i;
+    rect.width = 64;
+    rect.height = 64;
+    sfSprite_setTextureRect(game.ronin, rect);
+    return (game.ronin);
+}

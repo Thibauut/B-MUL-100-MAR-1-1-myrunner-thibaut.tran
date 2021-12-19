@@ -19,6 +19,9 @@
 #include <time.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#define sfcc sfClock_create
+#define sfkp sfEvtKeyPressed
+#define sfec sfEvtClosed
 #define spt sfSprite
 #define sfrw sfRenderWindow
 #define sfvi sfVector2i
@@ -54,6 +57,7 @@ typedef struct my_clock_s {
     sfTime time;
     float sec;
     int i;
+    int j;
 } my_clock_t;
 
 typedef struct my_var_s {
@@ -68,6 +72,8 @@ typedef struct my_map_s {
     char **map;
     sfvi pos;
     bool jump;
+    int verif;
+    sfvi pos_tmp;
 } my_map_t;
 
 #ifndef MY_H_
@@ -119,12 +125,13 @@ spt *rect_ronin(sfrw *window, my_game_t game, my_var_t *var);
 my_game_t my_bg_game(sfrw *window, my_game_t game, my_var_t *var);
 my_game_t my_ronin_game(sfrw *window, my_game_t game, my_var_t *var);
 my_game_t ronin_anim(sfrw *window, my_game_t game, float sec, my_var_t *var);
-int my_button_game(sfrw *window, my_game_t game, my_map_t map);
-char **move_sprite(my_map_t map, my_game_t game);
+
+int my_button_game(sfrw *window, my_game_t game, my_map_t *map, my_clock_t *c_anim);
+
+sfvi move_sprite(my_map_t *map, my_game_t game);
 sfvi find_player(char **map);
 
-spt *rect2_ronin(sfrw *window, my_game_t game, int i);
-void anim_jump(my_clock_t *c_anim, my_map_t map, my_game_t game, sfrw *window);
-
+spt *rect2_ronin(sfrw *window, my_game_t game, my_clock_t *c_anim);
+void ronin_jump(my_clock_t *c_anim, my_map_t *map, my_game_t game, sfrw *window);
 
 #endif

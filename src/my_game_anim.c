@@ -49,3 +49,16 @@ my_game_t ronin_anim(sfrw *window, my_game_t game, float sec, my_var_t *var)
     }
     return (game);
 }
+
+void ronin_jump(my_clock_t *c_anim, my_map_t *map, my_game_t game, sfrw *window)
+{
+    if (c_anim->sec > 0.04) {
+        c_anim->i += 64;
+        if (c_anim->i >= 960) {
+            c_anim->i = 0;
+            map->verif = 0;
+        }
+        game.ronin = rect2_ronin(window, game, &*c_anim);
+        sfClock_restart(c_anim->clock);
+    }
+}
