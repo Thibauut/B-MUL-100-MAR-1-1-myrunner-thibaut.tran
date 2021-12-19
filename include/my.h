@@ -60,6 +60,12 @@ typedef struct my_clock_s {
     int j;
 } my_clock_t;
 
+typedef struct all_clock_s {
+    my_clock_t c_bg;
+    my_clock_t c_run;
+    my_clock_t c_jump;
+} all_clock_t;
+
 typedef struct my_var_s {
     int i;
     int j;
@@ -94,6 +100,12 @@ int my_strlen(char const *str);
 int set_random(int max, int min);
 void my_put_nbr(int nb);
 
+//clock
+all_clock_t fill_clock(void);
+my_clock_t my_init_clock(void);
+void my_clock_anim(all_clock_t *clock);
+void my_clock_restart(all_clock_t *clock);
+
 //window
 sfSprite* create_sprite(char* file, int x, int y, float scx, float scy);
 sfRenderWindow *create_window(int x, int y, int i, char *my_title);
@@ -123,8 +135,7 @@ spt *rect_bg2_game(sfrw *window, my_game_t game, my_var_t *var);
 spt *rect_bg3_game(sfrw *window, my_game_t game, my_var_t *var);
 spt *rect_ronin(sfrw *window, my_game_t game, my_var_t *var);
 my_game_t my_bg_game(sfrw *window, my_game_t game, my_var_t *var);
-my_game_t my_ronin_game(sfrw *window, my_game_t game, my_var_t *var);
-my_game_t ronin_anim(sfrw *window, my_game_t game, float sec, my_var_t *var);
+my_game_t ronin_run(sfrw *window, my_game_t game, float sec, my_var_t *var);
 
 int my_button_game(sfrw *window, my_game_t game, my_map_t *map, my_clock_t *c_anim);
 

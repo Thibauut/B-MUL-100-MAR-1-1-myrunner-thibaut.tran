@@ -24,15 +24,6 @@ my_game_t my_bg_game(sfrw *window, my_game_t game, my_var_t *var)
     return (game);
 }
 
-my_game_t my_ronin_game(sfrw *window, my_game_t game, my_var_t *var)
-{
-    game.ronin = rect_ronin(window, game, var);
-    var->m += 64;
-    if (var->m >= 640)
-        var->m = 0;
-    return (game);
-}
-
 my_game_t bg_game_anim(sfrw *window, my_game_t game, float sec, my_var_t *var)
 {
     if (seconds > 0.01) {
@@ -41,11 +32,13 @@ my_game_t bg_game_anim(sfrw *window, my_game_t game, float sec, my_var_t *var)
     return (game);
 }
 
-
-my_game_t ronin_anim(sfrw *window, my_game_t game, float sec, my_var_t *var)
+my_game_t ronin_run(sfrw *window, my_game_t game, float sec, my_var_t *var)
 {
     if (seconds > 0.07) {
-        game = my_ronin_game(window, game, var);
+        game.ronin = rect_ronin(window, game, var);
+        var->m += 64;
+        if (var->m >= 640)
+            var->m = 0;
     }
     return (game);
 }

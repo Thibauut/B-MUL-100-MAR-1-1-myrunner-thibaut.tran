@@ -14,6 +14,15 @@ int my_init_game(sfrw *window, char *av)
     return (0);
 }
 
+my_game_t my_init_spt_game(my_game_t game)
+{
+    game.bg_game = create_sprite("res/game/bg_game.png", 0, 0, 1, 1);
+    game.bg_game_2 = create_sprite("res/game/bg_game_2.png", 0, -100, 1, 1);
+    game.bg_game_3 = create_sprite("res/game/bg_game_3.png", 0, 60, 1, 1);
+    game.ronin = create_sprite("res/sprite/ronin_spt.png", 0, 830, 5, 5);
+    return (game);
+}
+
 sfvi move_sprite(my_map_t *map, my_game_t game)
 {
     map->pos.x = 0, map->pos.y = 0;
@@ -42,32 +51,21 @@ int my_button_game(sfrw *window, my_game_t game, my_map_t *map, my_clock_t *c_an
     return (0);
 }
 
-my_game_t my_init_spt_game(my_game_t game)
-{
-    game.bg_game = create_sprite("res/game/bg_game.png", 0, 0, 1, 1);
-    game.bg_game_2 = create_sprite("res/game/bg_game_2.png", 0, -100, 1, 1);
-    game.bg_game_3 = create_sprite("res/game/bg_game_3.png", 0, 60, 1, 1);
-    game.ronin = create_sprite("res/sprite/ronin_spt.png", 0, 830, 5, 5);
-    return (game);
-}
 
 int my_game(sfrw *window, char *av)
 {
-    my_clock_t c_bg = {sfcc(), 0, 0}, c1 = {sfcc(), 0, 0}, c_anim = {sfcc(), 0, 0};
+    all_clock_t clock = fill_clock();
     my_var_t *var = malloc(sizeof(my_var_t));
     var->i = 0, var->j = 0, var->k = 0, var->m = 0;
     my_game_t game = my_init_spt_game(game);
     my_map_t map;
     map.map = str_to_tab(av, 192, 108), map.verif = 0;
     while (sfRenderWindow_isOpen(window)) {
-        c_bg.time = sfcget(c_bg.clock), c_bg.sec = c_bg.time.m_sec / 1000000.0;
-        c1.time = sfcget(c1.clock), c1.sec = c1.time.m_sec / 1000000.0;
-        c_anim.time = sfcget(c_anim.clock), c_anim.sec = c_anim.time.m_sec / 1000000.0;
-        game = bg_game_anim(window, game, c_bg.sec, var);
-        if (map.verif == 0) game = ronin_anim(window, game, c1.sec, var);
-        my_button_game(window, game, &map, &c_anim);
-        if (c_bg.sec > 0.01) sfClock_restart(c_bg.clock);
-        if (c1.sec > 0.07) sfClock_restart(c1.clock);
+        my_clock_anim(&clock);
+        game = bg_game_anim(window, game, clock.c_bg.sec, var);
+        if (map.verif == 0) game = ronin_run(window, game, clock.c_run.sec, var);
+        my_button_game(window, game, &map, &clock.c_jump);
+        my_clock_restart(&clock);
         display_game(window, game);
     }
     return (0);

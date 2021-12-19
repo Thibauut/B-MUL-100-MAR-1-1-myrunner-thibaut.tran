@@ -24,3 +24,11 @@ sfSprite* create_sprite(char* file, int x, int y, float scx, float scy)
     sfSprite_setPosition(sprite, pos);
     return (sprite);
 }
+
+my_clock_t my_init_clock(void)
+{
+    my_clock_t my_clock;
+    my_clock.clock = sfcc();
+    my_clock.seconds = 0;
+    return (my_clock);
+}
