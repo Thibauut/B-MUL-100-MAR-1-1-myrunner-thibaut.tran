@@ -10,7 +10,7 @@ SRC	=	src/my_func.c	\
 		src/load_my_map.c	\
 		src/my_h.c	\
 		src/my_create.c	\
-		src/check_map.c	\
+		src/move_in_map.c	\
 		menu/my_menu_anim.c	\
 		menu/my_menu_event.c	\
 		menu/my_menu.c	\
@@ -19,6 +19,9 @@ SRC	=	src/my_func.c	\
 		game/my_game_event.c	\
 		game/my_game_rect.c	\
 		game/my_game_clock.c	\
+		game/my_add_obs.c	\
+		game/my_player_anim.c	\
+		game/my_check_obs.c	\
 		my_runner.c
 
 
@@ -42,6 +45,8 @@ clean :
 	rm	-f	*.o
 	rm	-f	*~
 	rm	-f	src/*.o
+	rm	-f	game/*.o
+	rm	-f	menu/*.o
 
 fclean :	clean
 	rm	-f	$(NAME)

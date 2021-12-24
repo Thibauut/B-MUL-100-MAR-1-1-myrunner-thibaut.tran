@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2021
-** B-CPE-110-MAR-1-1-BSQ-thibaut.tran
+** B-MUL-100-MAR-1-1-myrunner-thibaut.tran
 ** File description:
-** load_my_tab.c
+** load_my_map.c
 */
 
 #include "../include/my.h"
@@ -10,8 +10,8 @@
 int my_show_word_array(char **tab)
 {
     int a = 0;
-    while (tab[a] != NULL) {
-        my_putstr(tab[a]);
+    while (a < 2) {
+        write(1, tab[a], 30);
         my_putstr("\n");
         a++;
     }
@@ -44,20 +44,4 @@ char *file_to_str(char const *filepath)
     read_my_file(fd, buffer, size);
     close(fd);
     return (buffer);
-}
-
-char **str_to_tab(char *file, int x, int y)
-{
-    int i = 0, j = 0, k = 0;
-    char *tab_str = file_to_str(file);
-    char **tab = malloc(sizeof(char *) * (y + 1));
-    while (i < y) {
-        tab[i] = malloc(sizeof(char) * (x + 1));
-        while (j < x) {
-            tab[i][j] = tab_str[k];
-            j += 1, k += 1;
-        }
-        j = 0, k += 1, i += 1;
-    }
-    return (tab);
 }

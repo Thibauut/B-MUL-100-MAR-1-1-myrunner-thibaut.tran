@@ -15,11 +15,12 @@ int my_init_menu(char *av)
     return (0);
 }
 
-int my_button(sfrw *window, my_menu_t menu, char *av)
+int but_menu(sfrw *window, my_menu_t menu, char *av)
 {
     sfEvent event;
-    sfVector2i pos_mouse;
-    sfVector2f size = {0.4, 0.4}, sizeup = {0.405, 0.405}, size2 = {0.27, 0.27}, sizeup2 = {0.275, 0.275};
+    sfvi pos_mouse;
+    sfvf size = {0.4, 0.4}, sizeup = {0.405, 0.405};
+    sfvf size2 = {0.27, 0.27}, sizeup2 = {0.275, 0.275};
     sfFloatRect play = sfSprite_getGlobalBounds(menu.play);
     sfFloatRect exit = sfSprite_getGlobalBounds(menu.exit);
     sfFloatRect option = sfSprite_getGlobalBounds(menu.option);
@@ -40,14 +41,14 @@ int my_menu(sfRenderWindow *window, char *av)
     my_var_t *var = malloc(sizeof(my_var_t));
     var->i = 0, var->j = 0;
     my_menu_t menu;
-    menu.bg_menu = create_sprite("res/menu/bg2.png", 0, 0, 1, 1);
+    menu.bg_menu = create_sprite("res/menu/bg2.png", -1, 0, 1.02, 1);
     menu.title = create_sprite("res/menu/title.png", 190, 80, 0.8, 0.9);
     menu.play = create_sprite("res/menu/play.png", 800, 655, 0.4, 0.4);
     menu.exit = create_sprite("res/menu/exit.png", 810, 800, 0.4, 0.4);
     menu.option = create_sprite("res/menu/option.png", 1560, 870, 0.27, 0.27);
     while (sfRenderWindow_isOpen(window)) {
         c_bg.time = sfcget(c_bg.clock), c_bg.sec = c_bg.time.m_sec / 1000000.0;
-        my_button(window, menu, av);
+        but_menu(window, menu, av);
         menu.bg_menu = my_bg_anim(window, menu.bg_menu, c_bg.sec, var);
         if (c_bg.sec > 0.18) sfClock_restart(c_bg.clock);
         display_menu(window, menu);

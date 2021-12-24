@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** B-MUL-100-MAR-1-1-myrunner-thibaut.tran
 ** File description:
-** my_anim.c
+** my_menu_anim.c
 */
 
 #include "../include/my.h"

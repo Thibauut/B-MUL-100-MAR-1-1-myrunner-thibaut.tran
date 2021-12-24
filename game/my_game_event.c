@@ -6,3 +6,15 @@
 */
 
 #include "../include/my.h"
+
+
+
+int player_verif(sfEvent event, all_clock_t *clock, my_map_t *map)
+{
+    if (sfkey(sfKeyUp) || sfkey(sfKeySpace) && map->verif == 0) {
+        clock->c_jump.i = 0;
+        map->verif = 1;
+        map->jump_verif = 0;
+    }
+    return (map->verif);
+}

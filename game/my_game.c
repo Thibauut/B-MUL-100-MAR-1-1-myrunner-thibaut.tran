@@ -7,76 +7,63 @@
 
 #include "../include/my.h"
 
-int my_init_game(sfrw *window, char *av)
+int init_game(sfrw *window, char *av)
 {
     sfRenderWindow_setFramerateLimit(window, 60);
     my_game(window, av);
     return (0);
 }
 
-my_game_t my_init_spt_game(my_game_t game)
+void init_spt_game(my_game_t *game, my_obs_t *obs)
 {
-    game.bg_game = create_sprite("res/game/bg_game.png", 0, 0, 1, 1);
-    game.bg_game_2 = create_sprite("res/game/bg_game_2.png", 0, -100, 1, 1);
-    game.bg_game_3 = create_sprite("res/game/bg_game_3.png", 0, 60, 1, 1);
-    game.ronin = create_sprite("res/sprite/ronin_spt.png", 0, 830, 5, 5);
-    return (game);
+    game->bg_game = create_sprite("res/game/bg_game.png", 0, 0, 1, 1);
+    game->bg_game_2 = create_sprite("res/game/bg_game_2.png", 0, -100, 1, 1);
+    game->bg_game_3 = create_sprite("res/game/bg_game_3.png", 0, 60, 1, 1);
+    game->ronin = create_sprite("res/sprite/frog.png", 20, 930, 3.5, 3.5);
+    return;
 }
 
-sfvi move_sprite(my_map_t *map, my_game_t game)
+int but_game(sfrw *window, my_game_t *game, my_map_t *map, all_clock_t *clock)
 {
-    map->pos.x = 0, map->pos.y = 0;
-    map->pos = find_player(map->map);
-    map->map[map->pos.y][map->pos.x] = '.';
-    map->map[map->pos.y - 10][map->pos.x] = 'X';
-    sfvi pos_tmp = {map->pos.x, 830 - ((map->pos.y - 116) * (-10))};
-    return (pos_tmp);
-}
-
-int my_button_game(sfrw *window, my_game_t game, my_map_t *map, my_clock_t *c_anim)
-{
-    sfEvent event;
+    sfEvent ev;
     sfVector2i pos_mouse;
-    while (sfRenderWindow_pollEvent(window, &event)) {
+    while (sfRenderWindow_pollEvent(window, &ev)) {
         pos_mouse = sfMouse_getPositionRenderWindow(window);
-        if (event.type == sfec || (event.type == sfkp && event.key.code == sfKeyQ))
+        if (ev.type == sfec || (ev.type == sfkp && ev.key.code == sfKeyQ))
             sfRenderWindow_close(window);
-        if (event.type == sfEvtKeyPressed && event.key.code == sfKeyUp) {
-            map->pos_tmp = move_sprite(map, game);
-            c_anim->i = 0;
-            map->verif = 1;
-        }
+        map->verif = player_verif(ev, &*clock, &*map);
     }
-    if (map->verif == 1) ronin_jump(&*c_anim, &*map, game, window);
+    if (map->verif == 1)
+        spt_jump(&clock->c_jump, &*map, &*game, window);
     return (0);
 }
-
 
 int my_game(sfrw *window, char *av)
 {
-    all_clock_t clock = fill_clock();
+    all_clock_t clock = init_clock(); my_map_t map; my_obs_t obs; my_game_t game;
     my_var_t *var = malloc(sizeof(my_var_t));
     var->i = 0, var->j = 0, var->k = 0, var->m = 0;
-    my_game_t game = my_init_spt_game(game);
-    my_map_t map;
-    map.map = str_to_tab(av, 192, 108), map.verif = 0;
+    init_spt_game(&game, &obs);
+    check_map(window, &map, &obs, av), map.verif = 0;
     while (sfRenderWindow_isOpen(window)) {
         my_clock_anim(&clock);
-        game = bg_game_anim(window, game, clock.c_bg.sec, var);
-        if (map.verif == 0) game = ronin_run(window, game, clock.c_run.sec, var);
-        my_button_game(window, game, &map, &clock.c_jump);
+        bg_game_anim(window, &game, clock.c_bg.sec, var);
+        if (map.verif == 0) spt_run(window, &game, clock.c_run.sec, var);
+        but_game(window, &game, &map, &clock);
+        move_obs(window, &obs, &clock.c_obs);
         my_clock_restart(&clock);
-        display_game(window, game);
+        display_game(window, &game, &obs);
     }
     return (0);
 }
 
-int display_game(sfRenderWindow *window, my_game_t game)
+int display_game(sfrw *window, my_game_t *game, my_obs_t *obs)
 {
-    sfRenderWindow_drawSprite(window, game.bg_game, NULL);
-    sfRenderWindow_drawSprite(window, game.bg_game_2, NULL);
-    sfRenderWindow_drawSprite(window, game.bg_game_3, NULL);
-    sfRenderWindow_drawSprite(window, game.ronin, NULL);
+    sfRenderWindow_drawSprite(window, game->bg_game, NULL);
+    sfRenderWindow_drawSprite(window, game->bg_game_2, NULL);
+    sfRenderWindow_drawSprite(window, game->bg_game_3, NULL);
+    sfRenderWindow_drawSprite(window, game->ronin, NULL);
+    sfRenderWindow_drawSprite(window, obs->obs_s, NULL);
     sfRenderWindow_display(window);
     return (0);
 }
