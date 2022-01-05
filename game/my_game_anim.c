@@ -7,27 +7,28 @@
 
 #include "../include/my.h"
 
-void bg_game(sfrw *window, my_game_t *game, my_var_t *var)
+void bg_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
 {
-    rect_bg_game(window, &*game, var);
-    var->i += 2;
-    if (var->i >= 1920)
-        var->i = 0;
-    rect_bg2_game(window, &*game, var);
-    var->j += 4;
-    if (var->j >= 1920)
-        var->j = 0;
-    rect_bg3_game(window, &*game, var);
-    var->k += 5;
-    if (var->k >= 1920)
-        var->k = 0;
+    rect_bg_game(window, &*game, c_bg);
+    c_bg->i += 2;
+    if (c_bg->i >= 1920)
+        c_bg->i = 0;
+    rect_bg2_game(window, &*game, c_bg);
+    c_bg->j += 4;
+    if (c_bg->j >= 1920)
+        c_bg->j = 0;
+    rect_bg3_game(window, &*game, c_bg);
+    c_bg->k += 7;
+    if (c_bg->k >= 1920)
+        c_bg->k = 0;
     return;
 }
 
-void bg_game_anim(sfrw *window, my_game_t *game, float sec, my_var_t *var)
+void bg_game_anim(sfrw *window, my_game_t *game, my_clock_t *c_bg)
 {
-    if (seconds > 0.01) {
-        bg_game(window, &*game, var);
+    if (c_bg->sec > 0.01) {
+        bg_game(window, &*game, &*c_bg);
+        sfClock_restart(c_bg->clock);
     }
     return;
 }

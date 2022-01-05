@@ -10,18 +10,23 @@ SRC	=	src/my_func.c	\
 		src/load_my_map.c	\
 		src/my_h.c	\
 		src/my_create.c	\
-		src/move_in_map.c	\
+		src/my_func_link_list.c	\
 		menu/my_menu_anim.c	\
 		menu/my_menu_event.c	\
 		menu/my_menu.c	\
+		menu/my_init_menu.c	\
 		game/my_game.c	\
+		game/my_init_game.c	\
 		game/my_game_anim.c	\
 		game/my_game_event.c	\
 		game/my_game_rect.c	\
 		game/my_game_clock.c	\
 		game/my_add_obs.c	\
+		game/my_obs_anim.c	\
 		game/my_player_anim.c	\
-		game/my_check_obs.c	\
+		game/my_rect_obs.c	\
+		game/my_collision.c	\
+		game/my_collide_rect.c	\
 		my_runner.c
 
 

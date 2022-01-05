@@ -7,18 +7,6 @@
 
 #include "../include/my.h"
 
-all_clock_t init_clock(void)
-{
-    all_clock_t clock;
-    clock.c_bg = create_clock();
-    clock.c_run = create_clock();
-    clock.c_jump = create_clock();
-    clock.c_move = create_clock();
-    clock.c_jump2 = create_clock();
-    clock.c_obs = create_clock();
-    return (clock);
-}
-
 void my_clock_anim(all_clock_t *clock)
 {
     clock->c_bg.time = sfcget(clock->c_bg.clock);
@@ -33,10 +21,8 @@ void my_clock_anim(all_clock_t *clock)
     clock->c_jump2.sec = clock->c_jump2.time.m_sec / 1000000.0;
     clock->c_obs.time = sfcget(clock->c_obs.clock);
     clock->c_obs.sec = clock->c_obs.time.m_sec / 1000000.0;
-}
-
-void my_clock_restart(all_clock_t *clock)
-{
-    if (clock->c_bg.sec > 0.01) sfClock_restart(clock->c_bg.clock);
-    if (clock->c_run.sec > 0.07) sfClock_restart(clock->c_run.clock);
+    clock->c_obs_1.time = sfcget(clock->c_obs_1.clock);
+    clock->c_obs_1.sec = clock->c_obs_1.time.m_sec / 1000000.0;
+    clock->c_obs_2.time = sfcget(clock->c_obs_2.clock);
+    clock->c_obs_2.sec = clock->c_obs_2.time.m_sec / 1000000.0;
 }

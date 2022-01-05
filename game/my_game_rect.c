@@ -7,44 +7,44 @@
 
 #include "../include/my.h"
 
-void rect_bg_game(sfrw *window, my_game_t *game, my_var_t *var)
+void rect_bg_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
 {
     sfIntRect rect;
     rect.top = 0;
-    rect.left = 0 + var->i;
+    rect.left = 0 + c_bg->i;
     rect.width = 3840;
     rect.height = 1080;
     sfSprite_setTextureRect(game->bg_game, rect);
 }
 
-void rect_bg2_game(sfrw *window, my_game_t *game, my_var_t *var)
+void rect_bg2_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
 {
     sfIntRect rect;
     rect.top = 0;
-    rect.left = 0 + var->j;
+    rect.left = 0 + c_bg->j;
     rect.width = 3840;
     rect.height = 1080;
     sfSprite_setTextureRect(game->bg_game_2, rect);
 }
 
-void rect_bg3_game(sfrw *window, my_game_t *game, my_var_t *var)
+void rect_bg3_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
 {
     sfIntRect rect;
     rect.top = 0;
-    rect.left = 0 + var->k;
+    rect.left = 0 + c_bg->k;
     rect.width = 3840;
     rect.height = 1080;
     sfSprite_setTextureRect(game->bg_game_3, rect);
 }
 
-void rect_ronin(sfrw *window, my_game_t *game, my_var_t *var)
+void rect_spt(sfrw *window, my_game_t *game, my_clock_t *c_run)
 {
     sfIntRect rect;
     rect.top = 0;
-    rect.left = 0 + var->m;
+    rect.left = 0 + c_run->i;
     rect.width = 32;
     rect.height = 32;
-    sfSprite_setTextureRect(game->ronin, rect);
+    sfSprite_setTextureRect(game->p, rect);
     return;
 }
 
@@ -55,5 +55,5 @@ void rect2_spt(sfrw *window, my_game_t *game, my_clock_t *c_anim)
     rect.left = 0 + c_anim->i;
     rect.width = 32;
     rect.height = 32;
-    sfSprite_setTextureRect(game->ronin, rect);
+    sfSprite_setTextureRect(game->p, rect);
 }

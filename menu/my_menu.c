@@ -38,19 +38,12 @@ int but_menu(sfrw *window, my_menu_t menu, char *av)
 int my_menu(sfRenderWindow *window, char *av)
 {
     my_clock_t c_bg = {sfClock_create(), 0, 0};
-    my_var_t *var = malloc(sizeof(my_var_t));
-    var->i = 0, var->j = 0;
     my_menu_t menu;
-    menu.bg_menu = create_sprite("res/menu/bg2.png", -1, 0, 1.02, 1);
-    menu.title = create_sprite("res/menu/title.png", 190, 80, 0.8, 0.9);
-    menu.play = create_sprite("res/menu/play.png", 800, 655, 0.4, 0.4);
-    menu.exit = create_sprite("res/menu/exit.png", 810, 800, 0.4, 0.4);
-    menu.option = create_sprite("res/menu/option.png", 1560, 870, 0.27, 0.27);
+    init_sprite_menu(&menu), init_menu_variable(&menu);
     while (sfRenderWindow_isOpen(window)) {
         c_bg.time = sfcget(c_bg.clock), c_bg.sec = c_bg.time.m_sec / 1000000.0;
         but_menu(window, menu, av);
-        menu.bg_menu = my_bg_anim(window, menu.bg_menu, c_bg.sec, var);
-        if (c_bg.sec > 0.18) sfClock_restart(c_bg.clock);
+        my_bg_anim(window, &menu, &c_bg);
         display_menu(window, menu);
     }
     return (0);

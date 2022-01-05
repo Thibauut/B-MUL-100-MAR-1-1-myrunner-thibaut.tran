@@ -7,29 +7,29 @@
 
 #include "../include/my.h"
 
-sfSprite *rect_bg(sfRenderWindow *window, spt *bg_menu, my_var_t *var)
+void rect_bg(sfRenderWindow *window, my_menu_t *menu)
 {
     sfIntRect rect;
-    rect.top = 0 + var->i;
-    rect.left = 0 + var->j;
+    rect.top = 0 + menu->i;
+    rect.left = 0 + menu->j;
     rect.width = 1920;
     rect.height = 1080;
-    sfSprite_setTextureRect(bg_menu, rect);
-    sfRenderWindow_drawSprite(window, bg_menu, NULL);
-    return (bg_menu);
+    sfSprite_setTextureRect(menu->bg_menu, rect);
+    sfRenderWindow_drawSprite(window, menu->bg_menu, NULL);
+    return;
 }
 
-sfSprite *my_bg_anim(sfrw *window, spt *bg_menu, float sec, my_var_t *var)
+void my_bg_anim(sfrw *window, my_menu_t *menu, my_clock_t *c_bg)
 {
-    if (sec > 0.18) {
-        bg_menu = rect_bg(window, bg_menu, var);
-        var->i += 1080;
-        if (var->i == 15120)
-            var->i = 0, var->j += 1920;
-        if (var->j == 9600)
-            var->j = 0;
+    if (c_bg->sec > 0.18) {
+        rect_bg(window, &*menu);
+        menu->i += 1080;
+        if (menu->i == 15120)
+            menu->i = 0, menu->j += 1920;
+        if (menu->j == 9600)
+            menu->j = 0;
+        sfClock_restart(c_bg->clock);
     }
-    return (bg_menu);
 }
 
 int my_anim_but(sffr rect, sfvi pos_m, sfvf size, sfvf sizeup, spt *menu)

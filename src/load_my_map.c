@@ -7,17 +7,6 @@
 
 #include "../include/my.h"
 
-int my_show_word_array(char **tab)
-{
-    int a = 0;
-    while (a < 2) {
-        write(1, tab[a], 30);
-        my_putstr("\n");
-        a++;
-    }
-    return (0);
-}
-
 int open_my_file(char const *filepath)
 {
     int fd = open(filepath, O_RDONLY);
@@ -32,13 +21,9 @@ int read_my_file(int fd, char *buffer, int size)
     return (0);
 }
 
-
 char *file_to_str(char const *filepath)
 {
-    int k = 0;
-    struct stat buf;
-    stat(filepath, &buf);
-    int size = buf.st_size;
+    int size = 61;
     char *buffer = malloc(sizeof(char) * size);
     int fd = open_my_file(filepath);
     read_my_file(fd, buffer, size);

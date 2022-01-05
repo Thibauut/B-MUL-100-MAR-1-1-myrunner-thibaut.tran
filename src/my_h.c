@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-int my_h()
+int my_h(void)
 {
     my_putstr("MY RUNNER\n");
     return (0);
