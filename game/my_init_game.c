@@ -14,16 +14,16 @@ int init_game(sfrw *window, char *av)
     return (0);
 }
 
-void init_spt_game(my_game_t *game)
+int init_spt_game(my_game_t *game)
 {
     game->bg_game = create_sprite("res/game/bg_game.png", 0, 0, 1, 1);
     game->bg_game_2 = create_sprite("res/game/bg_game_2.png", 0, -100, 1, 1);
     game->bg_game_3 = create_sprite("res/game/bg_game_3.png", 0, 60, 1, 1);
     game->p = create_sprite("res/sprite/frog.png", 20, 930, 3.5, 3.5);
-    return;
+    return (0);
 }
 
-void init_variable(all_clock_t *clock, my_map_t *map, my_game_t *game)
+int init_variable(all_clock_t *clock, my_map_t *map, my_game_t *game)
 {
     game->i = 0;
     map->verif = 0;
@@ -35,6 +35,7 @@ void init_variable(all_clock_t *clock, my_map_t *map, my_game_t *game)
     clock->c_obs_2.i = 0;
     clock->c_run.i = 0;
     clock->c_jump.i = 0;
+    return (0);
 }
 
 all_clock_t init_clock(void)

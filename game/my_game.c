@@ -41,32 +41,32 @@ int my_game(sfrw *window, char *av)
     return (0);
 }
 
-int display_obs(sfrw *window, my_game_t *game, all_list_t *list, all_clock_t *clock)
+int display_obs(sfrw *w, my_game_t *game, all_list_t *list, all_clock_t *clock)
 {
     my_list_t *obs_1 = malloc(sizeof(my_list_t));
     obs_1 = list->list_1;
     for (; obs_1 != NULL; obs_1 = obs_1->next) {
-        anim_obs_1(window, obs_1, &clock->c_obs_1);
-        move_obs(window, obs_1, &clock->c_obs);
-        sfRenderWindow_drawSprite(window, obs_1->obs, NULL);
+        anim_obs_1(w, obs_1, &clock->c_obs_1);
+        move_obs(w, obs_1, &clock->c_obs);
+        sfRenderWindow_drawSprite(w, obs_1->obs, NULL);
     }
     my_list_t *obs_2 = malloc(sizeof(my_list_t));
     obs_2 = list->list_2;
     for (; obs_2 != NULL; obs_2 = obs_2->next) {
-        anim_obs_2(window, obs_2, &clock->c_obs_2);
-        move_obs(window, obs_2, &clock->c_obs);
-        sfRenderWindow_drawSprite(window, obs_2->obs, NULL);
+        anim_obs_2(w, obs_2, &clock->c_obs_2);
+        move_obs(w, obs_2, &clock->c_obs);
+        sfRenderWindow_drawSprite(w, obs_2->obs, NULL);
     }
     return (0);
 }
 
-int display_game(sfrw *window, my_game_t *game, all_list_t *list, all_clock_t *clock)
+int display_game(sfrw *w, my_game_t *game, all_list_t *list, all_clock_t *clock)
 {
-    sfRenderWindow_drawSprite(window, game->bg_game, NULL);
-    sfRenderWindow_drawSprite(window, game->bg_game_2, NULL);
-    sfRenderWindow_drawSprite(window, game->bg_game_3, NULL);
-    sfRenderWindow_drawSprite(window, game->p, NULL);
-    display_obs(window, &*game, &*list, &*clock);
-    sfRenderWindow_display(window);
+    sfRenderWindow_drawSprite(w, game->bg_game, NULL);
+    sfRenderWindow_drawSprite(w, game->bg_game_2, NULL);
+    sfRenderWindow_drawSprite(w, game->bg_game_3, NULL);
+    sfRenderWindow_drawSprite(w, game->p, NULL);
+    display_obs(w, &*game, &*list, &*clock);
+    sfRenderWindow_display(w);
     return (0);
 }

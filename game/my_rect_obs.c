@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-void rect_obs_1(sfrw *window, my_list_t *list, my_clock_t *c_obs_1)
+int rect_obs_1(sfrw *window, my_list_t *list, my_clock_t *c_obs_1)
 {
     sfIntRect rect;
     rect.top = 0;
@@ -15,9 +15,10 @@ void rect_obs_1(sfrw *window, my_list_t *list, my_clock_t *c_obs_1)
     rect.width = 32;
     rect.height = 34;
     sfSprite_setTextureRect(list->obs, rect);
+    return (0);
 }
 
-void rect_obs_2(sfrw *window, my_list_t *list, my_clock_t *c_obs_2)
+int rect_obs_2(sfrw *window, my_list_t *list, my_clock_t *c_obs_2)
 {
     sfIntRect rect;
     rect.top = 0;
@@ -25,4 +26,5 @@ void rect_obs_2(sfrw *window, my_list_t *list, my_clock_t *c_obs_2)
     rect.width = 32;
     rect.height = 32;
     sfSprite_setTextureRect(list->obs, rect);
+    return (0);
 }

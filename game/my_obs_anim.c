@@ -8,7 +8,7 @@
 #include "../include/my.h"
 
 
-void anim_obs_1(sfrw *window, my_list_t *list, my_clock_t *c_obs_1)
+int anim_obs_1(sfrw *window, my_list_t *list, my_clock_t *c_obs_1)
 {
     if (c_obs_1->sec > 0.1) {
         rect_obs_1(window, list, &*c_obs_1);
@@ -17,10 +17,10 @@ void anim_obs_1(sfrw *window, my_list_t *list, my_clock_t *c_obs_1)
             c_obs_1->i = 0;
         sfClock_restart(c_obs_1->clock);
     }
-    return;
+    return (0);
 }
 
-void anim_obs_2(sfrw *window, my_list_t *list, my_clock_t *c_obs_2)
+int anim_obs_2(sfrw *window, my_list_t *list, my_clock_t *c_obs_2)
 {
     if (c_obs_2->sec > 0.04) {
         rect_obs_2(window, list, &*c_obs_2);
@@ -29,10 +29,10 @@ void anim_obs_2(sfrw *window, my_list_t *list, my_clock_t *c_obs_2)
             c_obs_2->i = 0;
         sfClock_restart(c_obs_2->clock);
     }
-    return;
+    return (0);
 }
 
-void move_obs(sfrw *window, my_list_t *list, my_clock_t *c_obs)
+int move_obs(sfrw *window, my_list_t *list, my_clock_t *c_obs)
 {
     sfvf pos = {-7, 0}, pos_o = sfSprite_getPosition(list->obs);
     if (c_obs->sec > 0.01) {
@@ -40,5 +40,5 @@ void move_obs(sfrw *window, my_list_t *list, my_clock_t *c_obs)
             sfSprite_move(list->obs, pos);
         sfClock_restart(c_obs->clock);
     }
-    return;
+    return (0);
 }

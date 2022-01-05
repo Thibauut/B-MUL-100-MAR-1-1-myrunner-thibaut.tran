@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-void rect_bg(sfRenderWindow *window, my_menu_t *menu)
+int rect_bg(sfRenderWindow *window, my_menu_t *menu)
 {
     sfIntRect rect;
     rect.top = 0 + menu->i;
@@ -16,10 +16,10 @@ void rect_bg(sfRenderWindow *window, my_menu_t *menu)
     rect.height = 1080;
     sfSprite_setTextureRect(menu->bg_menu, rect);
     sfRenderWindow_drawSprite(window, menu->bg_menu, NULL);
-    return;
+    return (0);
 }
 
-void my_bg_anim(sfrw *window, my_menu_t *menu, my_clock_t *c_bg)
+int my_bg_anim(sfrw *window, my_menu_t *menu, my_clock_t *c_bg)
 {
     if (c_bg->sec > 0.18) {
         rect_bg(window, &*menu);
@@ -30,6 +30,7 @@ void my_bg_anim(sfrw *window, my_menu_t *menu, my_clock_t *c_bg)
             menu->j = 0;
         sfClock_restart(c_bg->clock);
     }
+    return (0);
 }
 
 int my_anim_but(sffr rect, sfvi pos_m, sfvf size, sfvf sizeup, spt *menu)

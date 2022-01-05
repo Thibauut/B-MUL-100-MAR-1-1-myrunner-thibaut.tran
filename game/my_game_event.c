@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-void player_verif(sfEvent *ev, all_clock_t *clock, my_map_t *map)
+int player_verif(sfEvent *ev, all_clock_t *clock, my_map_t *map)
 {
     if (ev->type == sfkp) {
         if ((sfkey(sfKeySpace) || sfkey(sfKeyUp)) && map->verif == 0) {
@@ -15,5 +15,5 @@ void player_verif(sfEvent *ev, all_clock_t *clock, my_map_t *map)
             map->jump_verif = 1;
         }
     }
-    return;
+    return (0);
 }

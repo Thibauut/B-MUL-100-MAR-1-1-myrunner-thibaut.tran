@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-void ajust_rect_p(sfFloatRect *rect_p, sfFloatRect *rect_p_2)
+int ajust_rect_p(sfFloatRect *rect_p, sfFloatRect *rect_p_2)
 {
     rect_p->width -= 37;
     rect_p->height -= 65;
@@ -17,9 +17,10 @@ void ajust_rect_p(sfFloatRect *rect_p, sfFloatRect *rect_p_2)
     rect_p_2->height -= 65;
     rect_p_2->top += 45;
     rect_p_2->left += 20.5;
+    return (0);
 }
 
-void ajust_rect_obs_1(sfFloatRect *rect_obs_1, sfFloatRect *rect_obs_1_1)
+int ajust_rect_obs_1(sfFloatRect *rect_obs_1, sfFloatRect *rect_obs_1_1)
 {
     rect_obs_1->width -= 50;
     rect_obs_1->height -= 25;
@@ -29,9 +30,10 @@ void ajust_rect_obs_1(sfFloatRect *rect_obs_1, sfFloatRect *rect_obs_1_1)
     rect_obs_1_1->height -= 45;
     rect_obs_1_1->top += 20;
     rect_obs_1_1->left += 15;
+    return (0);
 }
 
-void ajust_rect_obs_2(sfFloatRect *rect_obs_2, sfFloatRect *rect_obs_2_1)
+int ajust_rect_obs_2(sfFloatRect *rect_obs_2, sfFloatRect *rect_obs_2_1)
 {
     rect_obs_2->width -= 45;
     rect_obs_2->height -= 23;
@@ -41,4 +43,5 @@ void ajust_rect_obs_2(sfFloatRect *rect_obs_2, sfFloatRect *rect_obs_2_1)
     rect_obs_2_1->height -= 53;
     rect_obs_2_1->top += 14;
     rect_obs_2_1->left -= 1;
+    return (0);
 }

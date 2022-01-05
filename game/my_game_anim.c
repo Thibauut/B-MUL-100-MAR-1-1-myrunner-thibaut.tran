@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-void bg_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
+int bg_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
 {
     rect_bg_game(window, &*game, c_bg);
     c_bg->i += 2;
@@ -21,14 +21,14 @@ void bg_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
     c_bg->k += 7;
     if (c_bg->k >= 1920)
         c_bg->k = 0;
-    return;
+    return (0);
 }
 
-void bg_game_anim(sfrw *window, my_game_t *game, my_clock_t *c_bg)
+int bg_game_anim(sfrw *window, my_game_t *game, my_clock_t *c_bg)
 {
     if (c_bg->sec > 0.01) {
         bg_game(window, &*game, &*c_bg);
         sfClock_restart(c_bg->clock);
     }
-    return;
+    return (0);
 }
