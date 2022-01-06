@@ -19,26 +19,49 @@ int spt_run(sfrw *window, my_game_t *game, my_clock_t *c_run)
     return (0);
 }
 
-int spt_jump(my_clock_t *c_anim, my_map_t *map, my_game_t *game, sfrw *window)
+int spt_jump(my_clock_t *c_jump, my_map_t *map, my_game_t *game, sfrw *window)
 {
     sfvf pos = {0, 12.5}, pos2 = {0, -12.5}, pos_p = sfsgp(game->p);
-    if (c_anim->sec > 0.01678) {
-        c_anim->i += 32;
-        if (c_anim->i >= 1024) c_anim->i = 0, map->verif = 0;
+    if (c_jump->sec > 0.016) {
+        c_jump->i += 32;
+        if (c_jump->i >= 1024) c_jump->i = 0, map->verif = 0;
         if (map->jump_verif != 0) {
             if (pos_p.y > 730) {
-                sfsm(game->p, pos2), rect2_spt(window, &*game, &*c_anim);
-                sfClock_restart(c_anim->clock); return (0);
+                sfsm(game->p, pos2), rect2_spt(window, &*game, &*c_jump);
+                sfClock_restart(c_jump->clock); return (0);
             }
             map->jump_verif = 0;
         }
         if (map->jump_verif == 0) {
             if (pos_p.y < 930) {
-                sfsm(game->p, pos), rect2_spt(window, &*game, &*c_anim);
-                sfClock_restart(c_anim->clock); return (0);
+                sfsm(game->p, pos), rect2_spt(window, &*game, &*c_jump);
+                sfClock_restart(c_jump->clock); return (0);
             }
             map->jump_verif = 1;
         }
+    }
+    return (0);
+}
+
+int rect3_spt(sfrw *window, my_game_t *game, my_clock_t *c_anim)
+{
+    sfIntRect rect;
+    rect.top = 96;
+    rect.left = 0 + c_anim->i;
+    rect.width = 32;
+    rect.height = 32;
+    sfSprite_setTextureRect(game->p, rect);
+    return (0);
+}
+
+int spt_atk(my_clock_t *c_atk, my_map_t *map, my_game_t *game, sfrw *window)
+{
+    if (c_atk->sec > 0.05) {
+        rect3_spt(window, &*game, &*c_atk);
+        c_atk->i += 32;
+        if (c_atk->i == 256)
+            c_atk->i = 0, map->verif = 0;
+        sfClock_restart(c_atk->clock);
     }
     return (0);
 }

@@ -25,5 +25,14 @@ int my_clock_anim(all_clock_t *clock)
     clock->c_obs_1.sec = clock->c_obs_1.time.m_sec / 1000000.0;
     clock->c_obs_2.time = sfcget(clock->c_obs_2.clock);
     clock->c_obs_2.sec = clock->c_obs_2.time.m_sec / 1000000.0;
+    clock->c_atk.time = sfcget(clock->c_atk.clock);
+    clock->c_atk.sec = clock->c_atk.time.m_sec / 1000000.0;
+    return (0);
+}
+
+int my_clock_anim2(all_clock_t *clock)
+{
+    clock->c_obs_3.time = sfcget(clock->c_obs_3.clock);
+    clock->c_obs_3.sec = clock->c_obs_3.time.m_sec / 1000000.0;
     return (0);
 }

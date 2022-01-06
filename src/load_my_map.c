@@ -23,7 +23,7 @@ int read_my_file(int fd, char *buffer, int size)
 
 char *file_to_str(char const *filepath)
 {
-    int size = 61;
+    int size = 241;
     char *buffer = malloc(sizeof(char) * size);
     int fd = open_my_file(filepath);
     read_my_file(fd, buffer, size);

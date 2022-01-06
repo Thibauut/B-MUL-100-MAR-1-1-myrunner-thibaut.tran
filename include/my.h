@@ -39,6 +39,8 @@
 #define sffr sfFloatRect
 #define sfsgp sfSprite_getPosition
 #define sfsm sfSprite_move
+#define all_c all_clock_t
+#define c collide_t
 
 typedef struct my_list_s {
     sfSprite *obs;
@@ -99,6 +101,8 @@ typedef struct all_clock_s {
     my_clock_t c_obs;
     my_clock_t c_obs_1;
     my_clock_t c_obs_2;
+    my_clock_t c_obs_3;
+    my_clock_t c_atk;
 } all_clock_t;
 
 typedef struct my_map_s {
@@ -166,8 +170,8 @@ int init_game(sfrw *window, char *av);
 int init_spt_game(my_game_t *game);
 all_list_t init_list(void);
 int my_game(sfrw *window, char *av);
-int display_game(sfrw *w, my_game_t *game, all_list_t *list, all_clock_t *c);
-int display_obs(sfrw *w, my_game_t *game, all_list_t *list, all_clock_t *c);
+int display_game(sfrw *w, my_game_t *game, all_list_t *list, all_clock_t *clock, collide_t *c);
+int display_obs(sfrw *w, my_game_t *game, all_list_t *list, all_clock_t *clock, collide_t *c);
 int bg_game_anim(sfrw *window, my_game_t *game, my_clock_t *c_bg);
 int rect_bg_game(sfrw *window, my_game_t *game, my_clock_t *c_bg);
 int rect_bg2_game(sfrw *window, my_game_t *game, my_clock_t *c_bg);
@@ -181,10 +185,14 @@ int jump_player(sfrw *window, my_map_t *map, my_clock_t *clock);
 int move_player(sfrw *window, my_map_t *map, my_clock_t *clock);
 sfvi find_player(char **map);
 int rect2_spt(sfrw *window, my_game_t *game, my_clock_t *c_anim);
+int rect3_spt(sfrw *window, my_game_t *game, my_clock_t *c_anim);
 int player_verif(sfEvent *ev, all_clock_t *clock, my_map_t *map);
-int spt_jump(my_clock_t *c_anim, my_map_t *map, my_game_t *game, sfrw *window);
+int spt_jump(my_clock_t *c_jump, my_map_t *map, my_game_t *game, sfrw *window);
+int spt_atk(my_clock_t *c_atk, my_map_t *map, my_game_t *game, sfrw *window);
 int check_obs(sfrw *window, my_map_t *map, all_list_t *list, char *av);
 int move_obs(sfrw *window, my_list_t *list, my_clock_t *c_obs);
+int move_obs2(sfrw *window, my_list_t *list, my_clock_t *c_obs);
+int move_obs3(sfrw *window, my_list_t *list, my_clock_t *c_obs);
 //obs1
 int put_obs_1(sfrw *window, my_map_t *map, char str, all_list_t *list);
 int add_obs_1(sfrw *window, all_list_t *list, sfvf pos, sfIntRect rect);
@@ -195,13 +203,21 @@ int put_obs_2(sfrw *window, my_map_t *map, char str, all_list_t *list);
 int add_obs_2(sfrw *window, all_list_t *list, sfvf pos, sfIntRect rect);
 int anim_obs_2(sfrw *window, my_list_t *list, my_clock_t *c_obs_2);
 int rect_obs_2(sfrw *window, my_list_t *list, my_clock_t *c_obs_2);
+
+int add_obs_3(sfrw *window, all_list_t *list, sfvf pos, sfIntRect rect);
+int put_obs_3(sfrw *window, my_map_t *map, char str, all_list_t *list);
+int anim_obs_3(sfrw *window, my_list_t *list, my_clock_t *c_obs_3);
 //collision
-int collision(all_list_t *list, my_game_t *game, sfrw *window, collide_t *c);
+int collision_1(my_list_t *list, my_game_t *game, sfrw *window, collide_t *c);
+int collision_2(my_list_t *list, my_game_t *game, sfrw *window, collide_t *c);
 int ajust_rect_p(sfFloatRect *rect_p, sfFloatRect *rect_p_2);
 int ajust_rect_obs_1(sfFloatRect *rect_obs_1, sfFloatRect *rect_obs_1_1);
 int ajust_rect_obs_2(sfFloatRect *rect_obs_2, sfFloatRect *rect_obs_2_1);
 int player_collide_1(sfrw *window, collide_t *c);
 int player_collide_2(sfrw *window, collide_t *c);
-int coll_rect(collide_t *c, my_list_t *obs_1, my_list_t *obs_2, my_game_t *game);
+int coll_rect_1(collide_t *c, my_list_t *obs_1, my_game_t *game);
+int coll_rect_2(collide_t *c, my_list_t *obs_2, my_game_t *game);
+
+int my_clock_anim2(all_clock_t *clock);
 
 #endif

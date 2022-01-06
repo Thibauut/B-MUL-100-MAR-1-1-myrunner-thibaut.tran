@@ -35,6 +35,8 @@ int init_variable(all_clock_t *clock, my_map_t *map, my_game_t *game)
     clock->c_obs_2.i = 0;
     clock->c_run.i = 0;
     clock->c_jump.i = 0;
+    clock->c_atk.i = 0;
+    clock->c_obs_3.i = 0;
     return (0);
 }
 
@@ -49,5 +51,7 @@ all_clock_t init_clock(void)
     clock.c_obs = create_clock();
     clock.c_obs_1 = create_clock();
     clock.c_obs_2 = create_clock();
+    clock.c_atk = create_clock();
+    clock.c_obs_3 = create_clock();
     return (clock);
 }

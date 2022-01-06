@@ -15,7 +15,6 @@ int rect_bg(sfRenderWindow *window, my_menu_t *menu)
     rect.width = 1920;
     rect.height = 1080;
     sfSprite_setTextureRect(menu->bg_menu, rect);
-    sfRenderWindow_drawSprite(window, menu->bg_menu, NULL);
     return (0);
 }
 

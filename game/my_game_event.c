@@ -14,6 +14,9 @@ int player_verif(sfEvent *ev, all_clock_t *clock, my_map_t *map)
             map->verif = 1;
             map->jump_verif = 1;
         }
+        if (sfkey(sfKeyA) && map->verif == 0) {
+            map->verif = 2;
+        }
     }
     return (0);
 }

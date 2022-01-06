@@ -25,8 +25,11 @@ SRC	=	src/my_func.c	\
 		game/my_obs_anim.c	\
 		game/my_player_anim.c	\
 		game/my_rect_obs.c	\
-		game/my_collision.c	\
+		game/my_collision_1.c	\
+		game/my_collision_2.c	\
+		game/my_collision_3.c	\
 		game/my_collide_rect.c	\
+		game/my_put_obs.c	\
 		my_runner.c
 
 
