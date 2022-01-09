@@ -14,7 +14,7 @@ int rect_bg_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
     rect.left = 0 + c_bg->i;
     rect.width = 3840;
     rect.height = 1080;
-    sfSprite_setTextureRect(game->bg_game, rect);
+    sfSprite_setTextureRect(game->bg_game_1, rect);
     return (0);
 }
 
@@ -40,24 +40,24 @@ int rect_bg3_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
     return (0);
 }
 
-int rect_spt(sfrw *window, my_game_t *game, my_clock_t *c_run)
+int rect_bg4_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
 {
     sfIntRect rect;
     rect.top = 0;
-    rect.left = 0 + c_run->i;
-    rect.width = 32;
-    rect.height = 32;
-    sfSprite_setTextureRect(game->p, rect);
+    rect.left = 0 + c_bg->l;
+    rect.width = 3840;
+    rect.height = 1080;
+    sfSprite_setTextureRect(game->bg_game_4, rect);
     return (0);
 }
 
-int rect2_spt(sfrw *window, my_game_t *game, my_clock_t *c_anim)
+int rect_bg5_game(sfrw *window, my_game_t *game, my_clock_t *c_bg)
 {
     sfIntRect rect;
-    rect.top = 32;
-    rect.left = 0 + c_anim->i;
-    rect.width = 32;
-    rect.height = 32;
-    sfSprite_setTextureRect(game->p, rect);
+    rect.top = 0;
+    rect.left = 0 + c_bg->n;
+    rect.width = 3840;
+    rect.height = 1080;
+    sfSprite_setTextureRect(game->bg_game_5, rect);
     return (0);
 }

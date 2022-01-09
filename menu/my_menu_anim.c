@@ -7,25 +7,14 @@
 
 #include "../include/my.h"
 
-int rect_bg(sfRenderWindow *window, my_menu_t *menu)
-{
-    sfIntRect rect;
-    rect.top = 0 + menu->i;
-    rect.left = 0 + menu->j;
-    rect.width = 1920;
-    rect.height = 1080;
-    sfSprite_setTextureRect(menu->bg_menu, rect);
-    return (0);
-}
-
 int my_bg_anim(sfrw *window, my_menu_t *menu, my_clock_t *c_bg)
 {
-    if (c_bg->sec > 0.18) {
+    if (c_bg->sec > 0.11) {
         rect_bg(window, &*menu);
         menu->i += 1080;
-        if (menu->i == 15120)
+        if (menu->i == 10800)
             menu->i = 0, menu->j += 1920;
-        if (menu->j == 9600)
+        if (menu->j == 7680)
             menu->j = 0;
         sfClock_restart(c_bg->clock);
     }

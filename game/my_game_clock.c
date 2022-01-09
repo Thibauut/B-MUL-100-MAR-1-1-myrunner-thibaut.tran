@@ -34,5 +34,9 @@ int my_clock_anim2(all_clock_t *clock)
 {
     clock->c_obs_3.time = sfcget(clock->c_obs_3.clock);
     clock->c_obs_3.sec = clock->c_obs_3.time.m_sec / 1000000.0;
+    clock->c_obs_3_1.time = sfcget(clock->c_obs_3_1.clock);
+    clock->c_obs_3_1.sec = clock->c_obs_3_1.time.m_sec / 1000000.0;
+    clock->c_score.time = sfcget(clock->c_score.clock);
+    clock->c_score.sec = clock->c_score.time.m_sec / 1000000.0;
     return (0);
 }
